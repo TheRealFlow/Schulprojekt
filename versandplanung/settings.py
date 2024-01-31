@@ -84,15 +84,15 @@ WSGI_APPLICATION = 'versandplanung.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'datasources/db.sqlite3',
     },
     'vehicles': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'vehicles.sqlite3',
+        'NAME': BASE_DIR / 'datasources/vehicles.sqlite3',
     },
     'orders': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'vehicles.sqlite3',
+        'NAME': BASE_DIR / 'datasources/vehicles.sqlite3',
     },
 }
 
