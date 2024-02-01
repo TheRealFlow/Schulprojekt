@@ -7,11 +7,8 @@
   <body>
     <h1>Vehicle List</h1>
     <ul>
-      {% for vehicle in vehicles %}
-      <li>
-        {{ vehicle.brandName }} {{ vehicle.modelName }} - {{
-        vehicle.licensePlate }}
-      </li>
+      {% for article in articles %}
+      <li>{{ article.name }} {{ article.prcie }} - {{ article.quantity }}</li>
       {% endfor %}
     </ul>
   </body>

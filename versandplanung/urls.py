@@ -20,10 +20,11 @@ from django.urls import path
 from versandplanung.index.views import index_site
 from versandplanung.vehicles.views import view_vehicles
 from versandplanung.orders.views import view_orders
+from versandplanung.articles.views import view_articles
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_site, name='index'),
-    path('vehicle', view_vehicles, name='index'),
-    path('orders', view_orders, name='index')
+    path('vehicles/', view_vehicles, name='view_vehicles'),
+    path('articles/', view_articles, name='view_articles')
 ]

@@ -1,8 +1,9 @@
-from django.http import HttpRequest
-from django.template.response import TemplateResponse
+from django.shortcuts import render
+from .models import Vehicle
 
-def view_vehicles(request: HttpRequest):
-    context = {
-        "someValue": "this is a value"
-    }
-    return TemplateResponse(request, 'vehicle.html', context = context)
+
+def view_vehicles(request):
+    vehicles = Vehicle.objects.all()
+    return render(request, 'vehicle.html', {
+        'vehicles': vehicles
+    })
