@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .models import Articles
 
 
 def view_articles(request):
