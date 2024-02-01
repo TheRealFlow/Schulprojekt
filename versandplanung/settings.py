@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'versandplanung.vehicles',
     'versandplanung.orders',
-    'versandplanung.index'
+    'versandplanung.index',
+    'versandplanung.tasks',
+    'versandplanung.customer',
+    'versandplanung.articles',
 ]
 
 MIDDLEWARE = [

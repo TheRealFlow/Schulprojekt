@@ -1,4 +1,4 @@
-class Articles:
+class Article:
     def __init__(self, id: str, name: str, price: int, short_description: str):
         self._id = id
         self._name = name

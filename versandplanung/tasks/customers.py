@@ -11,7 +11,7 @@ cities: List[str] = ['Berlin', 'Hamburg', 'Munich', 'Cologne', 'Frankfurt', 'Stu
 
 num_customers = 150
 
-customers = [{'UserId': fake.uuid4(), 'First_Name': fake.first_name(), 'Last_Name': fake.last_name(
+customers = [{'UserId': random.randint(1, 184094848), 'First_Name': fake.first_name(), 'Last_Name': fake.last_name(
 ), 'City': random.choice(cities), 'E-Mail': fake.email()} for _ in range(num_customers)]
 
 csv_file_path = "../../datasources/customer_data.csv"
