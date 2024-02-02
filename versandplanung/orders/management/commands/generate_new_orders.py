@@ -41,7 +41,7 @@ class Command(BaseCommand):
 
         Orders.objects.all().delete()
         for user in customer_data:
-            Orders.objects.create(orderNumber=fake.uuid4(), customerId=user.get_id(), articles=get_random_selection_from_list(article_data), address="Test")
+            Orders.objects.create(orderNumber=fake.uuid4(), customerId=user.get_id(), articles=get_random_selection_from_list(article_data), address=user.get_city())
         
         
         
