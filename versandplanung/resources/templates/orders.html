@@ -1,0 +1,89 @@
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .status-open {
+      background-color: red;
+      padding: 10px;
+    }
+
+    .status-in-progress {
+      background-color: orange;
+      padding: 10px;
+    }
+
+    .status-shipped {
+      background-color: yellow;
+      padding: 10px;
+    }
+
+    .status-delivered {
+      background-color: green;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Bestellungen</h2>
+  <table>
+    <tr>
+      <th>Bestellnummer</th>
+      <th>Artikel</th>
+      <th>Kunde</th>
+      <th>Lieferadresse</th>
+      <th>Gesamtpreis</th>
+      <th>Status</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.orderNumber }}</td>
+      <td>
+        {% for article in order.articles %} {{ article.name }} -
+        {{article.count}}x ,<br />
+        {% endfor %}
+      </td>
+      <td>{{ order.customerId }}</td>
+      <td>{{ order.address }}</td>
+      <td>{{ order.total|floatformat:2 }} €</td>
+      <td>
+        {% if order.status == 'open' %}
+        <span class="status-open">{{ order.status }}</span>
+        {% elif order.status == 'in progress' %}
+        <span class="status-in-progress">{{ order.status }}</span>
+        {% elif order.status == 'shipped' %}
+        <span class="status-shipped">{{ order.status }}</span>
+        {% elif order.status == 'delivered' %}
+        <span class="status-delivered">{{ order.status }}</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>

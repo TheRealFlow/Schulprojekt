@@ -18,12 +18,16 @@ from django.contrib import admin
 from django.urls import path
 
 from versandplanung.index.views import index_site
+from versandplanung.articles.views import view_articles
+from versandplanung.customer.views import view_customers
 from versandplanung.vehicles.views import view_vehicles
 from versandplanung.orders.views import view_orders
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_site, name='index'),
-    path('vehicle', view_vehicles, name='index'),
-    path('orders', view_orders, name='index')
+    path('articles/', view_articles, name='index'),
+    path('customers/', view_customers, name='index'),
+    path('vehicles/', view_vehicles, name='index'),
+    path('orders/', view_orders, name='index')
 ]

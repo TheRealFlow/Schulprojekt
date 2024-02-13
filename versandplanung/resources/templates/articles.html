@@ -1,0 +1,55 @@
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #e6e6e6;
+    }
+  </style>
+</head>
+<body>
+  <h2>Artikel</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Preis</th>
+      <th>Kurzbeschreibung</th>
+    </tr>
+    {% for article in articles %}
+    <tr>
+      <td>{{ article.id }}</td>
+      <td>{{ article.name }}</td>
+      <td>{{ article.price|floatformat:2 }} €</td>
+      <td>{{ article.short_description }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>

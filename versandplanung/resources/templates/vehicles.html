@@ -1,0 +1,80 @@
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #e6e6e6;
+    }
+
+    .status-free {
+      background-color: green;
+      padding: 10px;
+    }
+
+    .status-on-tour {
+      background-color: yellow;
+      padding: 10px;
+    }
+
+    .status-garage {
+      background-color: red;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Fahrzeuge</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Marke</th>
+      <th>Modell</th>
+      <th>Kennzeichen</th>
+      <th>Verfügbarkeit</th>
+    </tr>
+    {% for vehicle in vehicles %}
+    <tr>
+      <td>{{ vehicle.id }}</td>
+      <td>{{ vehicle.brandName }}</td>
+      <td>{{ vehicle.modelName }}</td>
+      <td>{{ vehicle.licensePlate }}</td>
+      <td>
+        {% if vehicle.status == 'free' %}
+        <span class="status-free">Frei</span>
+        {% elif vehicle.status == 'on tour' %}
+        <span class="status-on-tour">Auf Tour</span>
+        {% elif vehicle.status == 'garage' %}
+        <span class="status-garage">In der Garage</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>

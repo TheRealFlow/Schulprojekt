@@ -4,22 +4,25 @@ from django.shortcuts import render
 def view_articles(request):
     articles = [
         {
-            'name': 'Bier',
+            'id': '1',
+            'name': 'Bread',
             'price': 1.50,
-            'quantity': 100
+            'short_description': 'Awesome Product'
         },
         {
-            'name': 'Pizza',
+            'id': '2',
+            'name': 'Milk',
             'price': 2.50,
-            'quantity': 50
+            'short_description': 'Awesome Product'
         },
         {
-            'name': 'Klopapier',
+            'id': '3',
+            'name': 'Eggs',
             'price': 3.50,
-            'quantity': 10
+            'short_description': 'Awesome Product'
         }
     ]
 
-    return render(request, 'article.html', {
+    return render(request, 'articles.html', {
         'articles': articles
     })

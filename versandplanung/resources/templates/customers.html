@@ -1,0 +1,57 @@
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #e6e6e6;
+    }
+  </style>
+</head>
+<body>
+  <h2>Kunden</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Adresse</th>
+      <th>Email</th>
+    </tr>
+    {% for customer in customers %}
+    <tr>
+      <td>{{ customer.id }}</td>
+      <td>{{ customer.first_name }}</td>
+      <td>{{ customer.last_name }}</td>
+      <td>{{ customer.city }}</td>
+      <td>{{ customer.email }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>

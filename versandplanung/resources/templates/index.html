@@ -1,1 +1,109 @@
-<h1>Hello World</h1>
+<head>
+  <title>Versandplanung</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #e6e6e6;
+    }
+    input {
+      width: 300px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+    }
+    #map {
+      border-radius: 4px;
+      width: 800px;
+      height: 600px;
+      background-color: #45a049;
+    }
+    .form {
+      max-width: 800px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Versandplanung</h1>
+
+  <a href="/articles/" class="button">Artikel</a>
+  <a href="/customers/" class="button">Kunden</a>
+  <a href="/vehicles/" class="button">Fahrzeuge</a>
+  <a href="/orders/" class="button">Bestellungen</a>
+
+  <h1>Die Karte</h1>
+
+  <div id="map"></div>
+
+  <div class="form">
+    <input type="text" id="start" placeholder="Start" />
+    <input type="text" id="end" placeholder="Ende" />
+    <button class="button">Route berechnen</button>
+  </div>
+
+  <script>
+    // initial koordinaten
+    var map = L.map("map").setView([54.0887, 12.1405], 10);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // placeholder koordinaten für routing
+    L.marker([54.0887, 12.1405]).addTo(map);
+    L.marker([54.0887, 12.1405]).addTo(map);
+
+    L.polyline([
+      [54.0887, 12.1405],
+      [54.0887, 12.1405],
+    ]).addTo(map);
+  </script>
+</body>
