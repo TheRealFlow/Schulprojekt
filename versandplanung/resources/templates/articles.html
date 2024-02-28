@@ -1,0 +1,81 @@
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #e6e6e6;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="/articles/" class="button">Artikel</a>
+    <a href="/customers/" class="button">Kunden</a>
+    <a href="/vehicles/" class="button">Fahrzeuge</a>
+    <a href="/orders/" class="button">Bestellungen</a>
+  </div>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Preis</th>
+      <th>Kurzbeschreibung</th>
+    </tr>
+    {% for article in articles %}
+    <tr>
+      <td>{{ article.get_id }}</td>
+      <td>{{ article.get_name }}</td>
+      <td>{{ article.get_price|floatformat:2 }} €</td>
+      <td>{{ article.get_short_description }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>

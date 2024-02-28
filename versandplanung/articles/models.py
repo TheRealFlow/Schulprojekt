@@ -12,7 +12,7 @@ class Article:
         return self._name
 
     def get_price(self) -> float:
-        return self._price * 1.19 # add 19% VAT
+        return self._price
 
     def get_short_description(self) -> str:
         return self._short_description[:46] + ' ...'

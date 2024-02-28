@@ -19,5 +19,7 @@ media/
 # Virtual environment
 venv/
 
-# Mac OS
+# Mac Os
 .DS_Store
+/.DS_Store
+

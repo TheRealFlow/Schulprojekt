@@ -25,25 +25,24 @@
     }
 
     th {
+      background-color: #f2f2f2;
       font-weight: bold;
     }
 
-    .link {
-      font-weight: bold;
-      text-decoration: none;
-      color: #4caf50;
+    tr:hover {
+      background-color: #e6e6e6;
     }
 
-    .status-open {
+    .status-free {
       display: inline-block;
-      border-bottom: 4px solid red;
+      border-bottom: 4px solid green;
       border-radius: 4px;
       color: black;
       text-align: center;
       font-weight: bold;
     }
 
-    .status-in-progress {
+    .status-on-tour {
       display: inline-block;
       border-bottom: 4px solid orange;
       border-radius: 4px;
@@ -52,18 +51,9 @@
       font-weight: bold;
     }
 
-    .status-shipped {
+    .status-garage {
       display: inline-block;
-      border-bottom: 4px solid yellow;
-      border-radius: 4px;
-      color: black;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .status-delivered {
-      display: inline-block;
-      border-bottom: 4px solid green;
+      border-bottom: 4px solid red;
       border-radius: 4px;
       color: black;
       text-align: center;
@@ -100,30 +90,25 @@
   </div>
   <table>
     <tr>
-      <th>Bestellnummer</th>
-      <th>Kunde</th>
-      <th>Lieferadresse</th>
-      <th>Gesamtpreis</th>
-      <th>Status</th>
+      <th>ID</th>
+      <th>Marke</th>
+      <th>Modell</th>
+      <th>Kennzeichen</th>
+      <th>Verfügbarkeit</th>
     </tr>
-    {% for order in orders %}
+    {% for vehicle in vehicles %}
     <tr>
+      <td>{{ vehicle.id }}</td>
+      <td>{{ vehicle.brandName }}</td>
+      <td>{{ vehicle.modelName }}</td>
+      <td>{{ vehicle.licensePlate }}</td>
       <td>
-        <a class="link" href="/order/{{ order.id }}/"> {{ order.id }} </a>
-      </td>
-
-      <td>{{ order.customerId }}</td>
-      <td>{{ order.address }}</td>
-      <td>{{ order.total|floatformat:2 }} €</td>
-      <td>
-        {% if order.status == 'open' %}
-        <span class="status-open">{{ order.status }}</span>
-        {% elif order.status == 'in progress' %}
-        <span class="status-in-progress">{{ order.status }}</span>
-        {% elif order.status == 'shipped' %}
-        <span class="status-shipped">{{ order.status }}</span>
-        {% elif order.status == 'delivered' %}
-        <span class="status-delivered">{{ order.status }}</span>
+        {% if vehicle.status == 'free' %}
+        <span class="status-free">Frei</span>
+        {% elif vehicle.status == 'on tour' %}
+        <span class="status-on-tour">Auf Tour</span>
+        {% elif vehicle.status == 'garage' %}
+        <span class="status-garage">In der Garage</span>
         {% endif %}
       </td>
     </tr>
