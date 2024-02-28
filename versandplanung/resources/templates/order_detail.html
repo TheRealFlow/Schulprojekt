@@ -1,11 +1,156 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Order Detail</title>
-  </head>
-  <body>
-    <h2>Order Detail</h2>
-    <p>Order Number: {{ order.orderNumber }}</p>
-    <!-- Weitere Details zur Bestellung hier... -->
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Detail</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .order-info {
+      margin-bottom: 20px;
+    }
+
+    .order-info__item {
+      margin-bottom: 10px;
+    }
+
+    .order-info__label {
+      font-weight: bold;
+    }
+
+    .order-info__value {
+      margin-left: 10px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    #map {
+      margin-top: 30px;
+      width: 80%;
+      height: 600px;
+      border-radius: 4px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    table {
+      display: none;
+    }
+
+    .leaflet-routing-alt {
+      background-color: #f2f2f2;
+      border-radius: 4px;
+      padding: 10px;
+      opacity: 0.8;
+    }
+
+    .leaflet-routing-alt-minimized {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="/articles/" class="button">Artikel</a>
+    <a href="/customers/" class="button">Kunden</a>
+    <a href="/vehicles/" class="button">Fahrzeuge</a>
+    <a href="/orders/" class="button">Bestellungen</a>
+  </div>
+
+  <div class="order-info">
+    <div class="order-info__item">
+      <span class="order-info__label">Order ID:</span>
+      <span class="order-info__value">{{ order.orderNumber }}</span>
+    </div>
+    <div class="order-info__item">
+      <span class="order-info__label">Customer ID:</span>
+      <span class="order-info__value">{{ order.customerId }}</span>
+    </div>
+    <div class="order-info__item">
+      <span class="order-info__label">Articles:</span>
+      <span class="order-info__value">
+        <ul>
+          {% for article in order.articles %}
+          <li>{{ article }}</li>
+          {% endfor %}
+        </ul>
+      </span>
+    </div>
+    <div class="order-info__item">
+      <span class="order-info__label">Total:</span>
+      <span class="order-info__value">{{ order.total|floatformat:2 }} €</span>
+    </div>
+    <div class="order-info__item">
+      <span class="order-info__label">Address:</span>
+      <span class="order-info__value">{{ order.address }}</span>
+    </div>
+    <div class="order-info__item">
+      <span class="order-info__label">Status:</span>
+      <span class="order-info__value">{{ order.status }}</span>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script>
+    var map = L.map("map").setView([54.092282, 12.138074], 10);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    var routeControl = L.Routing.control({
+      routeWhileDragging: true,
+    }).addTo(map);
+
+    var orderAddress = "{{ order.address }}";
+
+    geocodeAndRoute(orderAddress);
+
+    function geocodeAndRoute(endLocationAddress) {
+      var geocodeUrl =
+        "https://nominatim.openstreetmap.org/search?format=json&q=";
+
+      fetch(geocodeUrl + encodeURIComponent(endLocationAddress))
+        .then((response) => response.json())
+        .then((data) => {
+          var endLat = data[0].lat;
+          var endLng = data[0].lon;
+
+          routeControl.setWaypoints([
+            L.latLng(54.092282, 12.138074),
+            L.latLng(endLat, endLng),
+          ]);
+        });
+    }
+  </script>
+</body>

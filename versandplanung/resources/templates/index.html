@@ -1,6 +1,4 @@
 <head>
-  <title>Versandplanung</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -32,59 +30,6 @@
       margin-bottom: 20px;
       border-bottom: 1px solid #cccccc;
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th,
-    td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #cccccc;
-    }
-
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-
-    tr:hover {
-      background-color: #e6e6e6;
-    }
-    input {
-      width: 250px;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #cccccc;
-      border-radius: 4px;
-    }
-    #map {
-      margin: 10px auto;
-      width: 80%;
-      height: 50%;
-      border-radius: 4px;
-    }
-    form {
-      max-width: 1000px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-    .leaflet-routing-alt {
-      background-color: #f2f2f2;
-      border-radius: 4px;
-      padding: 10px;
-      opacity: 0.8;
-    }
-    table {
-      display: none;
-    }
-    .leaflet-routing-alt-minimized {
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -94,86 +39,4 @@
     <a href="/vehicles/" class="button">Fahrzeuge</a>
     <a href="/orders/" class="button">Bestellungen</a>
   </div>
-
-  <div id="map"></div>
-
-  <form id="routeForm">
-    <!-- Startadresse ist festgelegt -->
-    <input type="hidden" id="startLocation" value="Strandstraße 88, Rostock" />
-
-    <!-- Dropdown-Menü mit Kundenoptionen -->
-    <select id="endLocationSelect">
-      <option value="">Wählen Sie einen Kunden aus</option>
-      <option value="Kunde 1|satower str. 57, kritzmow">Kunde 1</option>
-      <option value="Kunde 2|mecklenburger allee 10, rostock">Kunde 2</option>
-      <!-- Fügen Sie weitere Kundendaten hinzu --></select
-    ><br />
-    <button class="button" type="submit">Route berechnen</button>
-  </form>
-
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-  <script>
-    var map = L.map("map").setView([54.092282, 12.138074], 10);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    var routeControl = L.Routing.control({
-      waypoints: [
-        L.latLng(54.092282, 12.138074),
-        L.latLng(54.092282, 12.138074),
-      ],
-      routeWhileDragging: true,
-    }).addTo(map);
-
-    document
-      .getElementById("routeForm")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-        var startLocation = document.getElementById("startLocation").value;
-        var endLocationSelect = document.getElementById("endLocationSelect");
-        var endLocationOption =
-          endLocationSelect.options[
-            endLocationSelect.selectedIndex
-          ].value.split("|");
-        var endLocationName = endLocationOption[0];
-        var endLocationAddress = endLocationOption[1];
-
-        geocodeAndRoute(startLocation, endLocationName, endLocationAddress);
-      });
-
-    function geocodeAndRoute(
-      startLocation,
-      endLocationName,
-      endLocationAddress
-    ) {
-      var geocodeUrl =
-        "https://nominatim.openstreetmap.org/search?format=json&q=";
-
-      // Geocode Startort
-      fetch(geocodeUrl + encodeURIComponent(startLocation))
-        .then((response) => response.json())
-        .then((data) => {
-          var startLat = data[0].lat;
-          var startLng = data[0].lon;
-
-          // Geocode Zielort aus Kundendaten
-          fetch(geocodeUrl + encodeURIComponent(endLocationAddress))
-            .then((response) => response.json())
-            .then((data) => {
-              var endLat = data[0].lat;
-              var endLng = data[0].lon;
-
-              // Setze Wegpunkte für die Route
-              routeControl.setWaypoints([
-                L.latLng(startLat, startLng),
-                L.latLng(endLat, endLng),
-              ]);
-            });
-        });
-    }
-  </script>
 </body>
