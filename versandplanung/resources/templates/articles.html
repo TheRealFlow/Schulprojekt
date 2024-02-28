@@ -71,10 +71,10 @@
     </tr>
     {% for article in articles %}
     <tr>
-      <td>{{ article.id }}</td>
-      <td>{{ article.name }}</td>
-      <td>{{ article.price|floatformat:2 }} €</td>
-      <td>{{ article.short_description }}</td>
+      <td>{{ article.get_id }}</td>
+      <td>{{ article.get_name }}</td>
+      <td>{{ article.get_price|floatformat:2 }} €</td>
+      <td>{{ article.get_short_description }}</td>
     </tr>
     {% endfor %}
   </table>
