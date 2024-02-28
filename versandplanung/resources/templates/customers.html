@@ -66,13 +66,13 @@
       <th>Email</th>
     </tr>
     {% for customer in customers %}
-    <tr>
-      <td>{{ customer.id }}</td>
-      <td>{{ customer.first_name }}</td>
-      <td>{{ customer.last_name }}</td>
-      <td>{{ customer.city }}</td>
-      <td>{{ customer.email }}</td>
-    </tr>
+      <tr>
+        <td>{{ customer.get_id }}</td>
+        <td>{{ customer.get_first_name }}</td>
+        <td>{{ customer.get_last_name }}</td>
+        <td>{{ customer.get_city }}</td>
+        <td>{{ customer.get_email }}</td>
+      </tr>
     {% endfor %}
   </table>
 </body>

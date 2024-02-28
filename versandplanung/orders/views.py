@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from versandplanung.orders.models import Orders
+
 
 def view_orders(request):
     orders = [
@@ -84,6 +86,8 @@ def view_orders(request):
             'total': 25.99
         }
     ]
+    
+    orders = Orders.objects.all()
 
     return render(request, 'orders.html', {
         'orders': orders,

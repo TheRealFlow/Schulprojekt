@@ -1,8 +1,10 @@
 from django.shortcuts import render
 
+from versandplanung.articles.models import Article
+
 
 def view_articles(request):
-    articles = [
+    """articles = [
         {
             'id': '1',
             'name': 'Bread',
@@ -21,7 +23,9 @@ def view_articles(request):
             'price': 3.50,
             'short_description': 'Awesome Product'
         }
-    ]
+    ]"""
+    
+    # articles = Article.objects.all() todo make reader form csv/xlsx file
 
     return render(request, 'articles.html', {
         'articles': articles
