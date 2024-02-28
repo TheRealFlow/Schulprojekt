@@ -25,37 +25,82 @@
     }
 
     th {
-      background-color: #f2f2f2;
       font-weight: bold;
     }
 
+    .link {
+      font-weight: bold;
+      text-decoration: none;
+      color: #4caf50;
+    }
+
     .status-open {
-      background-color: red;
-      padding: 10px;
+      display: inline-block;
+      border-bottom: 4px solid red;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
     }
 
     .status-in-progress {
-      background-color: orange;
-      padding: 10px;
+      display: inline-block;
+      border-bottom: 4px solid orange;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
     }
 
     .status-shipped {
-      background-color: yellow;
-      padding: 10px;
+      display: inline-block;
+      border-bottom: 4px solid yellow;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
     }
 
     .status-delivered {
-      background-color: green;
+      display: inline-block;
+      border-bottom: 4px solid green;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
       padding: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #cccccc;
     }
   </style>
 </head>
 <body>
-  <h2>Bestellungen</h2>
+  <div class="header">
+    <a href="/articles/" class="button">Artikel</a>
+    <a href="/customers/" class="button">Kunden</a>
+    <a href="/vehicles/" class="button">Fahrzeuge</a>
+    <a href="/orders/" class="button">Bestellungen</a>
+  </div>
   <table>
     <tr>
       <th>Bestellnummer</th>
-      <th>Artikel</th>
       <th>Kunde</th>
       <th>Lieferadresse</th>
       <th>Gesamtpreis</th>
@@ -63,12 +108,10 @@
     </tr>
     {% for order in orders %}
     <tr>
-      <td>{{ order.orderNumber }}</td>
       <td>
-        {% for article in order.articles %} {{ article.name }} -
-        {{article.count}}x ,<br />
-        {% endfor %}
+        <a class="link" href="/order/{{ order.id }}/"> {{ order.id }} </a>
       </td>
+
       <td>{{ order.customerId }}</td>
       <td>{{ order.address }}</td>
       <td>{{ order.total|floatformat:2 }} €</td>

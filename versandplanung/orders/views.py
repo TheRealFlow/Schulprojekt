@@ -4,6 +4,7 @@ from django.shortcuts import render
 def view_orders(request):
     orders = [
         {
+            'id': 1,
             'orderNumber': '123',
             'customerId': 1,
             'articles': [
@@ -23,6 +24,7 @@ def view_orders(request):
             'total': 105.50
         },
         {
+            'id': 2,
             'orderNumber': '124',
             'customerId': 2,
             'articles': [
@@ -42,6 +44,7 @@ def view_orders(request):
             'total': 62.75
         },
         {
+            'id': 3,
             'orderNumber': '125',
             'customerId': 3,
             'articles': [
@@ -61,6 +64,7 @@ def view_orders(request):
             'total': 100.00
         },
         {
+            'id': '4',
             'orderNumber': '126',
             'customerId': 4,
             'articles': [

@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c#y&1%%frb7#40k86+qz%#55jxotk9m)t1n!8vx%pm3rtk=fi#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # TODO: Change to False for production
+DEBUG = True  # TODO: Change to False for production
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'versandplanung.tasks',
     'versandplanung.customer',
     'versandplanung.articles',
+    'versandplanung.order_detail',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(os.path.normpath(os.path.dirname(__file__)), 'resources', 'templates'),
+            os.path.join(os.path.normpath(os.path.dirname(
+                __file__)), 'resources', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

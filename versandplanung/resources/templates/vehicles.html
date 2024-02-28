@@ -34,23 +34,60 @@
     }
 
     .status-free {
-      background-color: green;
-      padding: 10px;
+      display: inline-block;
+      border-bottom: 4px solid green;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
     }
 
     .status-on-tour {
-      background-color: yellow;
-      padding: 10px;
+      display: inline-block;
+      border-bottom: 4px solid orange;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
     }
 
     .status-garage {
-      background-color: red;
+      display: inline-block;
+      border-bottom: 4px solid red;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
       padding: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #cccccc;
     }
   </style>
 </head>
 <body>
-  <h2>Fahrzeuge</h2>
+  <div class="header">
+    <a href="/articles/" class="button">Artikel</a>
+    <a href="/customers/" class="button">Kunden</a>
+    <a href="/vehicles/" class="button">Fahrzeuge</a>
+    <a href="/orders/" class="button">Bestellungen</a>
+  </div>
   <table>
     <tr>
       <th>ID</th>
