@@ -5,6 +5,7 @@ from openpyxl import load_workbook
 from os import path
 from json import dumps
 from faker import Faker
+from random import choice
 from versandplanung.articles.helpers import get_random_selection_from_list
 
 from versandplanung.articles.models import Article
@@ -43,7 +44,25 @@ class Command(BaseCommand):
 
         Orders.objects.all().delete()
         for user in customer_data:
+            random_articles = get_random_selection_from_list(article_data)
+            articles = list(filter(lambda x: articleFilter(list(map(lambda x: list(x.keys())[0], random_articles)), x), article_data))
+            article_prices = {}
+            for item in articles:
+                article_prices[item.get_name()] = item.get_price()
+            
+            total_sum = 0
+            for article_sum in random_articles:
+                try:
+                    price_per_unit = int(article_prices[list(article_sum.keys())[0]])
+                except ValueError:
+                    price_per_unit = 0
+                total_sum += price_per_unit * int(list(article_sum.values())[0])
+            
             Orders.objects.create(orderNumber=fake.uuid4(), customerId=user.get_id(
-            ), articles=get_random_selection_from_list(article_data), address=user.get_city())
+            ), articles=random_articles, address=user.get_city(), status=choice(Orders.STATUS_CHOICES), total=total_sum)
+        
 
-        # vehicles_count = Vehicle.objects.count()
+def articleFilter(search_vals: List[str], val: Article) -> bool:
+    if val.get_name() in search_vals:
+        return True
+    return False
