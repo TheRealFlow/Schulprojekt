@@ -13,6 +13,8 @@ from versandplanung.orders.models import Orders
 
 
 class Command(BaseCommand):
+    help = "Generates new orders overriding the existing ones."
+
     def handle(self, *args, **kwargs):
         fake = Faker()
         customer_data: List[Customer] = []
@@ -43,6 +45,7 @@ class Command(BaseCommand):
         Orders.objects.all().delete()
         for user in customer_data:
             random_articles = get_random_selection_from_list(article_data)
+            # black magic: don't touch
             articles = list(filter(lambda x: articleFilter(list(map(lambda x: list(x.keys())[0], random_articles)), x), article_data))
             article_prices = {}
             for item in articles:
@@ -56,9 +59,15 @@ class Command(BaseCommand):
                     price_per_unit = 0
                 total_sum += price_per_unit * int(list(article_sum.values())[0])
             
-            Orders.objects.create(orderNumber=fake.uuid4(), customerId=user.get_id(
-            ), articles=random_articles, address=user.get_city(), status=choice(Orders.STATUS_CHOICES)[0], total=total_sum)
-        
+            Orders.objects.create(
+                orderNumber=fake.uuid4(),
+                customerId=user.get_id(),
+                articles=random_articles,
+                address=user.get_city(),
+                status=choice(Orders.STATUS_CHOICES)[0],
+                total=total_sum
+            )
+
 
 def articleFilter(search_vals: List[str], val: Article) -> bool:
     if val.get_name() in search_vals:
