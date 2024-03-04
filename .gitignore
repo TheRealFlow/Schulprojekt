@@ -18,6 +18,7 @@ media/
 
 # Virtual environment
 venv/
+schulprojekt/
 
 # Mac Os
 .DS_Store
