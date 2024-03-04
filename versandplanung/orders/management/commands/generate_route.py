@@ -30,7 +30,10 @@ class Command(BaseCommand):
         headers = {'Content-Type': 'application/json'}
         data = {
             "mode": "drive",
-            "agents": [{"start_location": [warehouse_location[1], warehouse_location[0]], "time_windows": [[time_window[0], time_window[1]]]} for _ in range(vehicle_count)],
+            "agents": [{
+                "start_location": [warehouse_location[1], warehouse_location[0]],
+                "time_windows": [[time_window[0], time_window[1]]]
+            } for _ in range(vehicle_count)], # one agent per vehicle
             "shipments": [{
              "id": str(order.orderNumber),
              "pickup": {"location": [warehouse_location[1], warehouse_location[0]], "duration": 120},
