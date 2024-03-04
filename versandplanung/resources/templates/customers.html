@@ -1,4 +1,6 @@
 <head>
+  <meta charset="UTF-8" />
+  <title>Customers</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -39,6 +41,10 @@
       transition: background-color 0.3s ease;
     }
 
+    .button:hover {
+      background-color: #45a049;
+    }
+
     .header {
       display: flex;
       align-items: center;
@@ -66,13 +72,13 @@
       <th>Email</th>
     </tr>
     {% for customer in customers %}
-      <tr>
-        <td>{{ customer.get_id }}</td>
-        <td>{{ customer.get_first_name }}</td>
-        <td>{{ customer.get_last_name }}</td>
-        <td>{{ customer.get_city }}</td>
-        <td>{{ customer.get_email }}</td>
-      </tr>
+    <tr>
+      <td>{{ customer.get_id }}</td>
+      <td>{{ customer.get_first_name }}</td>
+      <td>{{ customer.get_last_name }}</td>
+      <td>{{ customer.get_city }}</td>
+      <td>{{ customer.get_email }}</td>
+    </tr>
     {% endfor %}
   </table>
 </body>
