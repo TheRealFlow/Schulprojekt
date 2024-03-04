@@ -3,7 +3,6 @@ from typing import List
 from django.core.management.base import BaseCommand, CommandError
 from openpyxl import load_workbook
 from os import path
-from json import dumps
 from faker import Faker
 from random import choice
 from versandplanung.articles.helpers import get_random_selection_from_list
@@ -11,7 +10,6 @@ from versandplanung.articles.helpers import get_random_selection_from_list
 from versandplanung.articles.models import Article
 from versandplanung.customer.models import Customer
 from versandplanung.orders.models import Orders
-from versandplanung.vehicles.models import Vehicle
 
 
 class Command(BaseCommand):
