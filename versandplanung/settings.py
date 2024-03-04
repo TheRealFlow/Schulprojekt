@@ -28,6 +28,7 @@ DEBUG = True  # TODO: Change to False for production
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1' # Fallback if the user didn't added the config to etc/hosts
 ]
 
 
@@ -65,8 +66,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(os.path.normpath(os.path.dirname(
-                __file__)), 'resources', 'templates'),
+            os.path.join(os.path.normpath(os.path.dirname(__file__)), 'resources', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

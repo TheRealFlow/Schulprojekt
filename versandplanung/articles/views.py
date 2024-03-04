@@ -1,3 +1,5 @@
+from os import path
+from versandplanung.settings import BASE_DIR
 from django.shortcuts import render
 from openpyxl import load_workbook
 
@@ -6,7 +8,11 @@ from versandplanung.articles.models import Article
 
 def view_articles(request):
     articles = []
-    articles_workbook = load_workbook('datasources/articles.xlsx')
+    
+    # we need the base dir in the path to make it run in the exe since the path is random their
+    article_path = "datasources/articles.xlsx"
+    absolute_path = path.join(BASE_DIR, article_path)
+    articles_workbook = load_workbook(absolute_path)
     article_sheet = articles_workbook.active
 
     # min_row=2 because the first row contains the headers
