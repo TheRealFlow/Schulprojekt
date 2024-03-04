@@ -6,24 +6,38 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
-      margin: 0;
+      margin: auto;
       padding: 20px;
+      max-width: 80%;
     }
 
-    .order-info {
-      margin-bottom: 20px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
     }
 
-    .order-info__item {
-      margin-bottom: 10px;
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .order-info__label {
+    ol {
+      padding-left: 20px;
+    }
+
+    ol li:not(:last-child) {
+      margin-bottom: 5px;
+    }
+
+    th {
+      background-color: #f2f2f2;
       font-weight: bold;
-    }
-
-    .order-info__value {
-      margin-left: 10px;
     }
 
     .button {
@@ -59,7 +73,47 @@
       margin-right: auto;
     }
 
-    table {
+    .status-open {
+      display: inline-block;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
+      background-color: rgba(217, 30, 24, 0.4);
+      width: 120px;
+    }
+
+    .status-in-progress {
+      display: inline-block;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
+      background-color: rgba(249, 105, 14, 0.4);
+      width: 120px;
+    }
+
+    .status-shipped {
+      display: inline-block;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
+      background-color: rgba(245, 230, 83, 0.4);
+      width: 120px;
+    }
+
+    .status-delivered {
+      display: inline-block;
+      border-radius: 4px;
+      color: black;
+      text-align: center;
+      font-weight: bold;
+      background-color: rgba(63, 195, 128, 0.4);
+      width: 120px;
+    }
+
+    table:last-child {
       display: none;
     }
 
@@ -83,45 +137,52 @@
     <a href="/orders/" class="button">Bestellungen</a>
   </div>
 
-  <div class="order-info">
-    <div class="order-info__item">
-      <span class="order-info__label">Order ID:</span>
-      <span class="order-info__value">{{ order.orderNumber }}</span>
-    </div>
-    <div class="order-info__item">
-      <span class="order-info__label">Customer ID:</span>
-      <span class="order-info__value">{{ order.customerId }}</span>
-    </div>
-    <div class="order-info__item">
-      <span class="order-info__label">Articles:</span>
-      <span class="order-info__value">
-        <ul>
+  <table>
+    <tr>
+      <th>Order ID</th>
+      <td>{{ order.orderNumber }}</td>
+    </tr>
+    <tr>
+      <th>Customer ID</th>
+      <td>{{ order.customerId }}</td>
+    </tr>
+    <tr>
+      <th>Articles</th>
+      <td>
+        <ol>
           {% for article in articles %}
-          <li>  
-            {% for keyValue in article %}
-              {{ keyValue }}
-              {% if forloop.first %}
-                <span>:</span>
-              {% endif %}
-            {% endfor%}
+          <li>
+            {% for keyValue in article %} {{ keyValue }} {% if forloop.first %}
+            <span>- Anzahl: </span>
+            {% endif %} {% endfor%}
           </li>
           {% endfor %}
-        </ul>
-      </span>
-    </div>
-    <div class="order-info__item">
-      <span class="order-info__label">Total:</span>
-      <span class="order-info__value">{{ order.total|floatformat:2 }} €</span>
-    </div>
-    <div class="order-info__item">
-      <span class="order-info__label">Address:</span>
-      <span class="order-info__value">{{ order.address }}</span>
-    </div>
-    <div class="order-info__item">
-      <span class="order-info__label">Status:</span>
-      <span class="order-info__value">{{ order.status }}</span>
-    </div>
-  </div>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td>{{ order.total|floatformat:2 }} €</td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>{{ order.address }}</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td>
+        {% if order.status == 'open' %}
+        <span class="status-open">{{ order.status }}</span>
+        {% elif order.status == 'in progress' %}
+        <span class="status-in-progress">{{ order.status }}</span>
+        {% elif order.status == 'shipped' %}
+        <span class="status-shipped">{{ order.status }}</span>
+        {% elif order.status == 'delivered' %}
+        <span class="status-delivered">{{ order.status }}</span>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
 
   <div id="map"></div>
 
@@ -137,6 +198,9 @@
 
     var routeControl = L.Routing.control({
       routeWhileDragging: true,
+      lineOptions: {
+        styles: [{ color: "#007bff", opacity: 0.7, weight: 6 }],
+      },
     }).addTo(map);
 
     var orderAddress = "{{ order.address }}";
