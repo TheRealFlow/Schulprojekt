@@ -1,0 +1,9 @@
+- funktionale anforderungen
+- wieso dieses thema
+- welche datenquellen (wieso diese)
+- Qualitätsprinzipien, welches tool zur erstellen
+- welches tool zum zusamen führen
+- etwas zum programm (welche module, tasks, views, models wieso so wie ist es und programm vorstellen)
+- bisschen was zeigen wie es aussieht
+- Klassendiagramm vorstellen
+- wieso Programmiersprache, wieso framework, wieso datenbank(sqlite)

@@ -96,8 +96,15 @@
       <span class="order-info__label">Articles:</span>
       <span class="order-info__value">
         <ul>
-          {% for article in order.articles %}
-          <li>{{ article }}</li>
+          {% for article in articles %}
+          <li>  
+            {% for keyValue in article %}
+              {{ keyValue }}
+              {% if forloop.first %}
+                <span>:</span>
+              {% endif %}
+            {% endfor%}
+          </li>
           {% endfor %}
         </ul>
       </span>
