@@ -57,7 +57,7 @@ class Command(BaseCommand):
                 total_sum += price_per_unit * int(list(article_sum.values())[0])
             
             Orders.objects.create(orderNumber=fake.uuid4(), customerId=user.get_id(
-            ), articles=random_articles, address=user.get_city(), status=choice(Orders.STATUS_CHOICES), total=total_sum)
+            ), articles=random_articles, address=user.get_city(), status=choice(Orders.STATUS_CHOICES)[0], total=total_sum)
         
 
 def articleFilter(search_vals: List[str], val: Article) -> bool:
