@@ -15,7 +15,8 @@ def view_customers(request):
     with open(absolute_path, newline='') as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
-            customers.append(Customer(row['UserId'], row['First_Name'],
+            # \ufeffUserId is some random windows bullshit
+            customers.append(Customer(row.get('\ufeffUserId', row.get('UserId')), row['First_Name'],
                              row['Last_Name'], row['City'], row['Street'], row['Street_Number'], row['E-Mail']))
     csv_file.close()
 

@@ -22,7 +22,8 @@ def order_detail(request, order_id):
         with open(path_to_redemption, 'r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
-                if int(row['UserId']) == order.customerId:
+                # \ufeffUserId is some random windows bullshit
+                if int(row.get('\ufeffUserId', row.get('UserId', '0'))) == order.customerId:
                     customer_data = row
                     break
     except (FileExistsError, FileNotFoundError) as error:
