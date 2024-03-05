@@ -24,6 +24,3 @@ class Vehicle(models.Model):
 
     # doing this allows to call Vehicle.objects.all() instead of Vehicle.objects.using('vehicles').all()
     objects = VehicleManger()
-
-    def save(self, force_insert: bool = ..., force_update: bool = ..., using: str | None = ..., update_fields: Iterable[str] | None = ...) -> None:
-        return super().save(force_insert, force_update, using, update_fields).using('vehicles')

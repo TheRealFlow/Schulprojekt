@@ -2,5 +2,5 @@
 [x] remove articles.csv
 [x] remove __pychache__
 [x] remove delivery_routes.json
-[ ] make exe and make it work
+[x] make exe and make it work
 [ ] write ReadMe including how to start
