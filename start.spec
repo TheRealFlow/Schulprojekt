@@ -12,14 +12,7 @@ a = Analysis(
         ('C:\Schulprojekt\\datasources\\mock_articles.xlsx', 'datasources/'),
         ('C:\Schulprojekt\\datasources\\orders.sqlite3', 'datasources/'),
         ('C:\Schulprojekt\\datasources\\vehicles.sqlite3', 'datasources/'),
-        #('C:\Schulprojekt\\versandplanung\\resources\\templates\\articles.html', 'resources/templates/'),
-        #('C:\Schulprojekt\\versandplanung\\resources\\templates\\customers.html', 'resources/templates/'),
-        #('C:\Schulprojekt\\versandplanung\\resources\\templates\\index.html', 'resources/templates/'),
-        #('C:\Schulprojekt\\versandplanung\\resources\\templates\\order_detail.html', 'resources/templates/'),
-        #('C:\Schulprojekt\\versandplanung\\resources\\templates\\orders.html', 'resources/templates/'),
-        #('C:\Schulprojekt\\versandplanung\\resources\\templates\\vehicles.html', 'resources/templates/'),
         ('C:\Schulprojekt\\versandplanung\\resources\\templates', 'versandplanung/resources/templates'),
-        #('versandplanung\\resources\\templates', 'versandplanung/resources/templates')
     ],
     hiddenimports=[
         'django.contrib.admin',
@@ -51,7 +44,7 @@ exe = EXE(
     a.datas,
     [],
     name='versandplanung',
-    debug=True,
+    debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
