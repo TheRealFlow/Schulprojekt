@@ -6,6 +6,23 @@ from os import path
 
 fake = Faker()
 
+
+CITY_ZIP_CODE_MAP = {
+    'Hamburg': '20095',
+    'Berlin': '10115',
+    'Munich': '80331',
+    'Cologne': '50667',
+    'Frankfurt': '60311',
+    'Stuttgart': '70173',
+    'Dusseldorf': '40213',
+    'Dortmund': '44135',
+    'Essen': '45127',
+    'Leipzig': '04109',
+    'Bremen': '28195',
+    'Dresden': '01067',
+    'Rostock': '18055'
+}
+
 # Liste von Städten und ihren zugehörigen Straßen
 city_streets_mapping = {
     'Berlin': ['Alexanderplatz', 'Kurfürstendamm', 'Friedrichstraße', 'Unter den Linden'],
@@ -28,12 +45,12 @@ cities: List[str] = list(city_streets_mapping.keys())
 num_customers = 150
 
 customers = [{'UserId': random.randint(1, 184094848), 'First_Name': fake.first_name(), 'Last_Name': fake.last_name(),
-              'City': city,
+              'City': "%s %s" % (CITY_ZIP_CODE_MAP[city], city),
               'Street': fake.random_element(city_streets_mapping[city]),
               'Street_Number': random.randint(1, 25),
               'E-Mail': fake.email()} for _ in range(num_customers) for city in cities]
 
-csv_file_path = "../../datasources/customer_data.csv"
+csv_file_path = "datasources/customer_data.csv"
 absolute_path = path.abspath(csv_file_path)
 
 with open(csv_file_path, 'w', newline='') as csv_file:
