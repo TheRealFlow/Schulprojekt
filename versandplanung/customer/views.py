@@ -10,7 +10,7 @@ from versandplanung.settings import BASE_DIR
 def view_customers(request):
     customers = []
     csv_customer_path = "datasources/customer_data.csv"
-    absolute_path = path.abspath(csv_customer_path)
+    absolute_path = path.join(BASE_DIR, csv_customer_path)
 
     with open(absolute_path, newline='') as csv_file:
         reader = csv.DictReader(csv_file)
