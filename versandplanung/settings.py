@@ -97,7 +97,7 @@ DATABASES = {
     },
     'orders': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'datasources/vehicles.sqlite3',
+        'NAME': BASE_DIR / 'datasources/orders.sqlite3',
     },
 }
 

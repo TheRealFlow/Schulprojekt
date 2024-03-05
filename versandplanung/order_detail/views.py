@@ -19,7 +19,7 @@ def order_detail(request, order_id):
     try:
         customer_file = 'datasources/customer_data.csv'
         path_to_redemption = path.join(BASE_DIR, customer_file)
-        with open(path_to_redemption, 'r') as csv_file:
+        with open(path_to_redemption, 'r', encoding='UTF-8') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
                 # \ufeffUserId is some random windows bullshit
