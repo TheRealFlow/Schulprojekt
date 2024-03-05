@@ -113,6 +113,32 @@
       width: 120px;
     }
 
+    .styled-select {
+      display: inline-block;
+      position: relative;
+      width: 50%;
+    }
+
+    .styled-select select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: #e6e6e6;
+      border: 2px solid #28a745;
+      padding: 8px;
+      font-size: 16px;
+      width: calc(100% - 20px);
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .vehicle-info {
+      display: inline-block;
+      padding: 8px;
+      background-color: #e6e6e6;
+      border-radius: 4px;
+    }
+
     table:last-child {
       display: none;
     }
@@ -139,15 +165,15 @@
 
   <table>
     <tr>
-      <th>Order ID</th>
+      <th>Bestell ID</th>
       <td>{{ order.orderNumber }}</td>
     </tr>
     <tr>
-      <th>Customer ID</th>
+      <th>Kunden ID</th>
       <td>{{ order.customerId }}</td>
     </tr>
     <tr>
-      <th>Articles</th>
+      <th>Artikel</th>
       <td>
         <ol>
           {% for article in articles %}
@@ -161,11 +187,11 @@
       </td>
     </tr>
     <tr>
-      <th>Total</th>
+      <th>Gesamtpreis</th>
       <td>{{ order.total|floatformat:2 }} €</td>
     </tr>
     <tr>
-      <th>Address</th>
+      <th>Lieferanschrift</th>
       <td>{{ order.address }}</td>
     </tr>
     <tr>
@@ -179,6 +205,37 @@
         <span class="status-shipped">{{ order.status }}</span>
         {% elif order.status == 'delivered' %}
         <span class="status-delivered">{{ order.status }}</span>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Fahrzeug</th>
+      <td>
+        {% if order.status == 'open' %}
+        <div class="styled-select">
+          <select name="vehicle" class="select-dropdown">
+            <option value="" disabled selected>
+              Wähle ein Fahrzeug für die Auslieferung
+            </option>
+            {% for vehicle in free_vehicles %}
+            <option value="{{ vehicle.id }}">
+              {{vehicle.licensePlate}} - {{ vehicle.brandName }},
+              {{vehicle.modelName}}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <a class="button" href="/">Auswählen</a>
+        {% elif order.status == 'in progress' or order.status == 'shipped' %}
+        <div class="vehicle-info">
+          {{ on_tour_vehicle.licensePlate }} - {{ on_tour_vehicle.brandName }},
+          {{on_tour_vehicle.modelName}}
+        </div>
+        {% elif order.status == 'delivered' %}
+        <div class="vehicle-info">
+          {{ random_vehicle.licensePlate }} - {{ random_vehicle.brandName }},
+          {{random_vehicle.modelName}}
+        </div>
         {% endif %}
       </td>
     </tr>

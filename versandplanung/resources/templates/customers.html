@@ -14,7 +14,6 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
-      table-layout: fixed;
     }
 
     th,
@@ -73,7 +72,8 @@
       <th>ID</th>
       <th>Vorname</th>
       <th>Nachname</th>
-      <th>Adresse</th>
+      <th>Ort</th>
+      <th>Straße, Hausnummer</th>
       <th>Email</th>
     </tr>
     {% for customer in customers %}
@@ -82,6 +82,7 @@
       <td>{{ customer.get_first_name }}</td>
       <td>{{ customer.get_last_name }}</td>
       <td>{{ customer.get_city }}</td>
+      <td>{{ customer.get_street }}, {{ customer.get_street_number }}</td>
       <td>{{ customer.get_email }}</td>
     </tr>
     {% endfor %}
