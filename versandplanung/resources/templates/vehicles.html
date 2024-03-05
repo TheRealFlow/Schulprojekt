@@ -5,18 +5,16 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
-      margin: 0;
+      margin: auto;
       padding: 20px;
-    }
-
-    h1 {
-      color: #333333;
+      max-width: 80%;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      table-layout: fixed;
     }
 
     th,
@@ -24,6 +22,9 @@
       padding: 10px;
       text-align: left;
       border-bottom: 1px solid #cccccc;
+      overflow: hidden;
+      text-overflow:
+      white-space: nowrap;
     }
 
     th {
@@ -37,29 +38,32 @@
 
     .status-free {
       display: inline-block;
-      border-bottom: 4px solid green;
       border-radius: 4px;
       color: black;
       text-align: center;
       font-weight: bold;
+      background-color: rgba(63, 195, 128, 0.4);
+      width: 120px;
     }
 
     .status-on-tour {
       display: inline-block;
-      border-bottom: 4px solid orange;
       border-radius: 4px;
       color: black;
       text-align: center;
       font-weight: bold;
+      background-color: rgba(249, 105, 14, 0.4);
+      width: 120px;
     }
 
     .status-garage {
       display: inline-block;
-      border-bottom: 4px solid red;
       border-radius: 4px;
       color: black;
       text-align: center;
       font-weight: bold;
+      background-color: rgba(217, 30, 24, 0.4);
+      width: 120px;
     }
 
     .button {
@@ -114,7 +118,7 @@
         {% elif vehicle.status == 'on tour' %}
         <span class="status-on-tour">Auf Tour</span>
         {% elif vehicle.status == 'garage' %}
-        <span class="status-garage">In der Garage</span>
+        <span class="status-garage">Werkstatt</span>
         {% endif %}
       </td>
     </tr>

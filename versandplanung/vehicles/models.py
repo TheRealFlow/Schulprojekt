@@ -20,7 +20,8 @@ class Vehicle(models.Model):
     modelYear = models.IntegerField()
     initalRegistration = models.DateField()
     licensePlate = models.CharField(max_length=10)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='garage')
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default='garage')
 
     # doing this allows to call Vehicle.objects.all() instead of Vehicle.objects.using('vehicles').all()
     objects = VehicleManger()

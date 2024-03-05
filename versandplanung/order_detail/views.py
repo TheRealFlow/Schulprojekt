@@ -1,5 +1,7 @@
+import random
 from django.shortcuts import render, get_object_or_404
 from versandplanung.orders.models import Orders
+from versandplanung.vehicles.models import Vehicle
 
 
 def order_detail(request, order_id):
@@ -10,5 +12,17 @@ def order_detail(request, order_id):
         for key, items in article.items():
             articles.append(list([key, items]))
 
-    return render(request, 'order_detail.html', {'order': order, "articles": articles})
+    free_vehicles = None
+    on_tour_vehicle = None
+    random_vehicle = None
 
+    if order.status == 'open':
+        free_vehicles = Vehicle.objects.filter(status='free')
+    elif order.status == 'in progress' or order.status == 'shipped':
+        on_tour_vehicles = Vehicle.objects.filter(status='on tour')
+        on_tour_vehicle = on_tour_vehicles.first() if on_tour_vehicles else None
+    elif order.status == 'delivered':
+        all_vehicles = Vehicle.objects.all()
+        random_vehicle = random.choice(all_vehicles) if all_vehicles else None
+
+    return render(request, 'order_detail.html', {'order': order, "articles": articles, "free_vehicles": free_vehicles, 'on_tour_vehicle': on_tour_vehicle, 'random_vehicle': random_vehicle})
