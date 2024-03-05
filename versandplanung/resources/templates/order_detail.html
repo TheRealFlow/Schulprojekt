@@ -173,6 +173,16 @@
       <td>{{ order.customerId }}</td>
     </tr>
     <tr>
+      <th>Lieferanschrift</th>
+      <td>
+        {{customer_data.Last_Name}}, {{customer_data.First_Name}}
+        <br />
+        {{ customer_data.Street }} {{ customer_data.Street_Number }},
+        <br />
+        {{ customer_data.City }}
+      </td>
+    </tr>
+    <tr>
       <th>Artikel</th>
       <td>
         <ol>
@@ -190,10 +200,7 @@
       <th>Gesamtpreis</th>
       <td>{{ order.total|floatformat:2 }} €</td>
     </tr>
-    <tr>
-      <th>Lieferanschrift</th>
-      <td>{{ order.address }}</td>
-    </tr>
+
     <tr>
       <th>Status</th>
       <td>
