@@ -27,3 +27,6 @@ schulprojekt/
 # dist
 /dist
 /build
+
+# node modules
+/node_modules
